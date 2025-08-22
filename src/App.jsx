@@ -1,26 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./Components/layouts/Header";
 import Home from "./Pages/Home";
-// import AboutUs from "./Pages/AboutUs";
-// import Contact from "./Pages/Contact";
-// import Wedding from "./Pages/Wedding";
-// import Birthday from "./Pages/Birthday";
-// ... import all pages
-
-// import MainLayout from "./Components/layouts/MainLayout";
+import Footer from "./Components/layouts/Footer";
 
 function App() {
   return (
     <Router>
-      {/* <MainLayout> */}
+      <Header />
+
+      <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<AboutUs />} /> */}
-          {/* <Route path="/contact" element={<Contact />} /> */}
-          {/* <Route path="/wedding" element={<Wedding />} />
-          <Route path="/birthday" element={<Birthday />} /> */}
-          {/* more routes */}
         </Routes>
-      {/* </MainLayout> */}
+      </main>
+
+      <Footer />
     </Router>
   );
 }

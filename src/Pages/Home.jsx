@@ -1,44 +1,65 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import "../custom.css"; // keep custom styles if you want extra
 
-export default function Home() {
+export default function HeroSection() {
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && contentRef.current) {
+          contentRef.current.classList.add("show");
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (contentRef.current) observer.observe(contentRef.current);
+
+    return () => {
+      if (contentRef.current) observer.unobserve(contentRef.current);
+    };
+  }, []);
+
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center bg-gray-900 text-white overflow-hidden">
-      {/* Background Hero Image */}
-      <img
-        src="/assets/hero-photography.jpg"
-        alt="Photography Background"
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
-      />
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* Slideshow Background */}
+      <div className="absolute inset-0">
+        <img
+          src="/Homepage/slidegroombride.jpg"
+          alt="First Slide"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 animate-fadeSlide1"
+        />
+        <img
+          src="/Homepage/slide3.jpg"
+          alt="Second Slide"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 animate-fadeSlide2"
+        />
+        <img
+          src="/Homepage/slidepree1.jpg"
+          alt="Third Slide"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 animate-fadeSlide3"
+        />
+      </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/40 z-5"></div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6">
-        <h1 className="text-4xl sm:text-6xl font-bold mb-4">
-          Capturing <span className="text-pink-400">Moments</span>,  
-          Creating <span className="text-indigo-400">Memories</span>
+      {/* Text Content */}
+      <div
+        ref={contentRef}
+        className="absolute bottom-12 right-8 text-right text-white z-10 opacity-0 translate-y-12 transition-all duration-700 ease-out"
+      >
+        <h1 className="text-4xl md:text-6xl font-bold leading-snug">
+          CAPTURING
+          <br />
+          TIMELESS MOMENTS
         </h1>
-        <p className="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-          From weddings to kids' smiles, we freeze your most precious memories in timeless frames.  
-        </p>
 
-        {/* CTA Buttons */}
-        <div className="flex justify-center gap-4">
-          <Link
-            to="/wedding"
-            className="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white rounded-xl font-medium shadow-lg transition"
-          >
-            Wedding Stories
-          </Link>
-          <Link
-            to="/kids"
-            className="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-medium shadow-lg transition"
-          >
-            Kids Moments
-          </Link>
-        </div>
+        <p className="italic mt-3 text-lg max-w-md ml-auto">
+          "Photography is the story I fail to put into words." – Destin Sparks
+        </p>
+        <div className="w-16 h-[2px] bg-white mt-4 ml-auto"></div>
       </div>
     </section>
   );

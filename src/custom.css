@@ -1,0 +1,32 @@
+/* 🔥 Smooth Crossfade Slideshow */
+@keyframes fadeSlide1 {
+  0%, 30% { opacity: 1; }
+  33%, 100% { opacity: 0; }
+}
+@keyframes fadeSlide2 {
+  0%, 33% { opacity: 0; }
+  36%, 63% { opacity: 1; }
+  66%, 100% { opacity: 0; }
+}
+@keyframes fadeSlide3 {
+  0%, 66% { opacity: 0; }
+  69%, 96% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-fadeSlide1 {
+  animation: fadeSlide1 15s infinite ease-in-out;
+}
+.animate-fadeSlide2 {
+  animation: fadeSlide2 15s infinite ease-in-out;
+}
+.animate-fadeSlide3 {
+  animation: fadeSlide3 15s infinite ease-in-out;
+}
+
+/* 🔥 Reveal text when in view */
+.show {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
